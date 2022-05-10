@@ -1,0 +1,4 @@
+{
+  "presets": ["@babel/preset-env"], //set of plugins to allow the latest ECMA functionalities
+  "plugins": ["@babel/plugin-transform-runtime"] //plugin to correct transpile async function
+}
