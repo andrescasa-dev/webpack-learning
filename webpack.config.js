@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const DotenvWebpackPlugin = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -10,7 +11,14 @@ module.exports = {
     filename: '[name].[contenthash].js',
   },
   resolve:{
-    extensions: ['.js']
+    extensions: ['.js'],
+    alias: {
+      '@styles': path.resolve(__dirname, 'src/styles'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@templates': path.resolve(__dirname, 'src/templates/'),
+      '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
+      '@images': path.resolve(__dirname, 'src/assets/images'),
+    }
   },
   module:{
     rules:[
@@ -46,6 +54,7 @@ module.exports = {
       filename: 'assets/[name].[contenthash].css'
     }),
     new CssMinimizerPlugin(),
+    new DotenvWebpackPlugin(),
   ],
   optimization: {
     minimize: true,

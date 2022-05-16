@@ -63,3 +63,25 @@ optimization: {
      },
     },
 ```
+
+## Alias
+it's like variables for paths. You can define them an using for import and exporting.
+
+```js
+//resolve section
+alias: {
+      '@styles': path.resolve(__dirname, 'src/styles'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@templates': path.resolve(__dirname, 'src/templates/'),
+}
+```
+
+```js
+import Template from '@templates/Template.js';
+import '@styles/main.css';
+```
+
+## Environment variables
+add the functionality to webpack to access to a ".env" file which contains all the important environment variables like the dev's API key.
+
+> plugin used: dotEnv.
