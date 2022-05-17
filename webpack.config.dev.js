@@ -1,14 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/index.js',
+  watch: true,
   output: {
     path: path.resolve(__dirname,'dist'),
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
     clean: true,
   },
   resolve:{
@@ -21,6 +21,7 @@ module.exports = {
       '@images': path.resolve(__dirname, 'src/assets/images'),
     }
   },
+  mode: 'development',
   module:{
     rules:[
       {
@@ -35,14 +36,14 @@ module.exports = {
         test: /\.png$/i,
         type: 'asset/resource',
         generator:{
-          filename: 'assets/images/[name].[contenthash][ext][query]'
+          filename: 'assets/images/[name][ext][query]'
         }
       },
       {
         test: /\.woff2$/,
         type: 'asset/resource',
         generator:{
-          filename: 'assets/fonts/[name].[contenthash][ext][query]'
+          filename: 'assets/fonts/[name][ext][query]'
         }
       }
     ]
@@ -52,13 +53,8 @@ module.exports = {
       template: './public/index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: 'assets/[name].[contenthash].css'
+      filename: 'assets/[name].css'
     }),
-    new CssMinimizerPlugin(),
     new DotenvWebpackPlugin(),
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [`...` , new CssMinimizerPlugin()],
-  }
 }

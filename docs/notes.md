@@ -39,12 +39,12 @@ for that reason we use hash content substitutions.
 ```js
   filename: '[name][contentHas].js',
 ```
-## Substitutions
+# Substitutions
 they are "variables" that we can use for giving a name to our files. examples:
  * [name]: the original name.
  * [contenthash]: yields a has when the content in the document changes.
 
-## cache groups using split code
+# cache groups using split code
 it's split the bundle, most of the time for separate the third-party code. Since this code is not going to change, it should keep the same name, that is, not apply contenthash.
 
 a new bundle "vendors" it's created for frameworks like react (for example).
@@ -64,7 +64,7 @@ optimization: {
     },
 ```
 
-## Alias
+# Alias
 it's like variables for paths. You can define them an using for import and exporting.
 
 ```js
@@ -81,7 +81,19 @@ import Template from '@templates/Template.js';
 import '@styles/main.css';
 ```
 
-## Environment variables
+# Environment variables
 add the functionality to webpack to access to a ".env" file which contains all the important environment variables like the dev's API key.
 
 > plugin used: dotEnv.
+
+# config file for each mode
+1. separate the configuration into two files:
+   1. webpack.config.dev.js
+   2. webpack.config.js
+2. insert the mode in the webpack config file
+   * mode: 'development'
+3. in the package.json, set the command for execute the correspondent file
+   * dev: "webpack --config webpack.config.dev.js
+
+# clean up dist
+so easy. since webpack 5 was added "output.clean = true" for that purpose.
